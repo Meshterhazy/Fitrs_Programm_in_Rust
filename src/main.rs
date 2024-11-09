@@ -1,84 +1,56 @@
 use std::io;
 
-fn sum(first_variable_plus_second_variable: f32) { [
-    first_variable, action, second_variable
-]
+fn sum(first_variable: f32, second_variable: f32) -> f32 {
+    first_variable + second_variable
 }
 
-fn defference(first_variable_minus_second_variable: f32) { [
-    first_variable, action, second_variable
-]
+fn difference(first_variable: f32, second_variable: f32) -> f32 {
+    first_variable - second_variable
 }
 
-fn product(first_variable_division_second_variable: f32) { [
-    first_variable, action, second_variable
-]
+fn product(first_variable: f32, second_variable: f32) -> f32 {
+    first_variable * second_variable
 }
 
-fn quotient(first_variable_multiplication_second_variable: f32) { [
-    first_variable, action, second_variable
-]
+fn quotient(first_variable: f32, second_variable: f32) -> f32 {
+    first_variable / second_variable
 }
 
-fn remainder(first_variable_remainder_second_variable: f32) { [
-    first_variable, action, second_variable
-]
+fn remainder(first_variable: f32, second_variable: f32) -> f32 {
+    first_variable % second_variable
 }
 
-fn action(self: first_variable, second_variable: f32, choise: u32) -> Option<f32>{
-    match choise {
-        1 => Some(sum(result_of_action)),
-        2 => Some(defference(result_of_action)),
-        3 => Some(product(result_of_action)),
-        4 => Some(quotient(result_of_action)),
-        5 => Some(remainder(result_of_action)),
+fn action(first_variable: f32, second_variable: f32, choice: u32) -> Option<f32> {
+    match choice {
+        1 => Some(sum(first_variable, second_variable)),
+        2 => Some(difference(first_variable, second_variable)),
+        3 => Some(product(first_variable, second_variable)),
+        4 => Some(quotient(first_variable, second_variable)),
+        5 => Some(remainder(first_variable, second_variable)),
         _ => None,
     }
 }
 
-fn main(){
-    println!("\n Wellcome to calculator on Rust!");
-    println!("Choose your action: \n (1) sum \n (2) defference \n (3) product  \n (4) quotient \n (5) remainder");
+fn main() {
+    println!("\nWelcome to the Rust calculator!");
+    println!("Choose your action: \n (1) sum \n (2) difference \n (3) product  \n (4) quotient \n (5) remainder");
 
-    let mut user_choise = String::new();
+    let mut user_choice = String::new();
+    io::stdin().read_line(&mut user_choice).expect("Failed to read line");
+    let nomber_of_choice: u32 = user_choice.trim().parse().expect("Please enter a number between 1 and 5.");
 
-    io::stdin().read_line(&mut user_choise).unwrap();
-
-    let n_coise = user_choise
-        .trim()
-        .parse::<u32>()
-        .expect("Please type a number.");
-    
-    let mut action = String::new();
-        _trim()
-        .parse::<u32>()
-        .expect("Your choise: ");
-
+    println!("Write the first variable:");
     let mut first_variable = String::new();
-        _trim()
-        .parse::<f32>()
-        .expect("Write a first variable.");
-    
+    io::stdin().read_line(&mut first_variable).expect("Failed to read line");
+    let first_variable: f32 = first_variable.trim().parse().expect("Please enter a valid number.");
+
+    println!("Write the second variable:");
     let mut second_variable = String::new();
-        _trim()
-        .parse::<f32>()
-        .expect("Write a second variable.");
+    io::stdin().read_line(&mut second_variable).expect("Failed to read line");
+    let second_variable: f32 = second_variable.trim().parse().expect("Please enter a valid number.");
 
-    io::stdin().read_line(&mut action).unwrap();
-
-    io::stdin().read_line(&mut first_variable).unwrap();
-
-    io::stdin().read_line(&mut second_variable).unwrap();
-
-    let mut result_of_action = String::new();
-
-    let result_of_action = result_of_action
-        _trim()
-        .parse::<f32>()
-        .expect("Please type a number of action.")
-
-    match convert(result_of_action, n_coise){
-        Some(result_of_action) => println!("The result of action: {result_of_action}")
-        Nano => println("Please wtite correct nomber of choise.")
+    match action(first_variable, second_variable, nomber_of_choice) {
+        Some(result) => println!("The result of the action is: {result}"),
+        None => println!("Please enter a valid choice."),
     };
 }
